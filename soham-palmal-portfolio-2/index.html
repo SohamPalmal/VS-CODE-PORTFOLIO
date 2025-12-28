@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full overflow-hidden">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Soham Palmal | VS Code Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #1e1e1e;
+            --bg-sidebar: #252526;
+            --bg-activity: #333333;
+            --bg-status: #007acc;
+            --bg-tab-inactive: #2d2d2d;
+            --border-color: #3c3c3c;
+            --text-main: #d4d4d4;
+            --text-accent: #4ec9b0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* VS Code Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border: 3px solid #1e1e1e;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        /* Utility classes */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Code highlighting simulation */
+        .token-keyword { color: #569cd6; }
+        .token-string { color: #ce9178; }
+        .token-comment { color: #6a9955; }
+        .token-function { color: #dcdcaa; }
+        .token-variable { color: #9cdcfe; }
+        .token-type { color: #4ec9b0; }
+        .token-constant { color: #b5cea8; }
+
+        /* Refined Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(8px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity, filter;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        .reveal.scroll-out {
+            opacity: 0.3;
+            transform: translateY(-15px);
+            filter: blur(2px);
+        }
+        
+        /* Device Rotation Animation */
+        @keyframes rotate-device {
+            0%, 20% { transform: rotate(0deg); }
+            50%, 70% { transform: rotate(90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .animate-rotate-device {
+            animation: rotate-device 4s infinite ease-in-out;
+            transform-origin: center center;
+        }
+
+        @media (max-width: 640px) {
+            .code-line-number {
+                display: none !important;
+            }
+        }
+
+        /* Resume Print Engine Styles */
+        @media print {
+            @page {
+                margin: 0;
+                size: auto;
+            }
+            
+            body, html {
+                background-color: white !important;
+                color: black !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                font-family: 'Times New Roman', Times, serif !important;
+            }
+
+            #root {
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            /* Reset the main app container for print */
+            [role="main"] {
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+                position: static !important;
+                background: white !important;
+            }
+
+            /* Hide strictly everything inside main that isn't the resume */
+            [role="main"] > *:not(.print-only) {
+                display: none !important;
+            }
+
+            /* Force display the resume */
+            .print-only {
+                display: block !important;
+                visibility: visible !important;
+                width: 100% !important;
+                height: auto !important;
+                padding: 1cm !important;
+                margin: 0 !important;
+                position: relative !important;
+                left: auto !important;
+                top: auto !important;
+                background: white !important;
+                color: black !important;
+            }
+
+            /* Ensure image prints */
+            .print-only img {
+                display: inline-block !important;
+                max-width: 100% !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            /* Hide utilities */
+            .no-print {
+                display: none !important;
+            }
+        }
+        
+        .print-only { 
+            display: none; 
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="h-full">
+    <div id="root" class="h-full"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
